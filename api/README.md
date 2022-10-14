@@ -1,16 +1,11 @@
 # PHP Login API with Slim Framework 4 and JWT Auth 
 
-This template should help get you started developing with this API.
-We recomend run this project in Docker.
+This template should help get you started developing with this API in Docker.
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/)
-
-## Project Setup
+## Build Containers
 
 ```sh
-docker-compose up
+docker compose up -d
 ```
 
 ### Install Composer Dependencies
@@ -23,7 +18,11 @@ docker run --rm --interactive --tty \
 
 ## Set Enviroment Variables
 
-See [PHP DotEnv Configuration Reference](https://github.com/vlucas/phpdotenv) and .env.example file.
+Create a .env file using .env.example and set variables. This variables are configs to connect to the database(MySQL), sending email(PHP Mailer) and JWT config tokens
+
+See: 
+[PHP DotEnv Configuration Reference](https://github.com/vlucas/phpdotenv)
+[PHP Mailer Configuration Reference](https://github.com/PHPMailer/PHPMailer)
 
 ## Conecting to Database
 
