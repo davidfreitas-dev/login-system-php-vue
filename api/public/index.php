@@ -4,7 +4,6 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Selective\BasePath\BasePathMiddleware;
 use Slim\Factory\AppFactory;
-use App\DB\Database;
 use App\Model\User;
 use App\Model\Auth;
 
@@ -28,7 +27,7 @@ $app->add(new Tuupola\Middleware\JwtAuthentication([
     "header" => "X-Token",
     "regexp" => "/(.*)/",
     "path" => "/",
-    "ignore" => ["/login", "/register", "/forgot", "/forgot/reset"],
+    "ignore" => ["/login", "/register", "/forgot", "/forgot/token", "/forgot/reset"],
     "secret" => $_ENV['JWT_SECRET_KEY'],
     "algorithm" => "HS256",
     "error" => function ($response, $arguments) {
