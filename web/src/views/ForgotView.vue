@@ -2,7 +2,6 @@
     import { ref, inject } from 'vue'
     import { useToast } from '@/use/useToast'
     import { useRouter } from 'vue-router'
-    import { useEnvStore } from '@/stores/env'
     
     import ImageForm from '../components/form/ImageForm.vue'
     import HeadingForm from '../components/form/HeadingForm.vue'
@@ -12,7 +11,6 @@
 
     const router = useRouter()
     const axios = inject('axios')
-    const storeEnv = useEnvStore()
 
     const isLoading = ref(false)
 
@@ -29,7 +27,7 @@
         isLoading.value = true
 
         axios
-            .post(storeEnv.apiURL + '/forgot', formData.value)
+            .post('/forgot', formData.value)
             .then((response) => {
                 if (response.data.status === 'success') {
                     handleToast('success', response.data.data)

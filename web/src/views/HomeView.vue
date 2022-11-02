@@ -1,35 +1,16 @@
 <script setup>
-    import { ref, inject, onMounted } from 'vue'
+    import { ref, onMounted } from 'vue'
     import { useRouter } from 'vue-router'
-    import { useEnvStore } from '@/stores/env'
     import { useSessionStore } from '@/stores/session'
-    import { useUsersStore } from '@/stores/users'
     import LogoutModal from '@/components/LogoutModal.vue'
 
     const router = useRouter()
-    const axios = inject('axios')
-    const storeEnv = useEnvStore()
     const storeSession = useSessionStore()
-    const storeUsers = useUsersStore()
 
     const verifySession = () => {
-        if (storeSession.session.hasOwnProperty('token')) {
-            return getUsers()
-        }
-
-        router.push('/login')
-    }
-
-    const getUsers = () => {
-        axios
-            .get(storeEnv.apiURL + '/users', { headers: { 'X-Token': storeSession.session.token } })
-            .then((response) => {
-                if (response.data.status === 'success') {
-                    storeUsers.setUsers(response.data.data)
-                } else {
-                    console.log(response.data.data)
-                }                
-            });
+        if (!storeSession.session.hasOwnProperty('token')) {
+            router.push('/login')
+        }        
     }
 
     onMounted(() => {

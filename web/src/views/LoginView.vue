@@ -2,7 +2,6 @@
     import { ref, inject } from 'vue'
     import { useToast } from '@/use/useToast'
     import { useRouter } from 'vue-router'
-    import { useEnvStore } from '@/stores/env'
     import { useSessionStore } from '@/stores/session'
     
     import ImageForm from '../components/form/ImageForm.vue'
@@ -13,7 +12,6 @@
 
     const router = useRouter()
     const axios = inject('axios')
-    const storeEnv = useEnvStore()
     const storeSession = useSessionStore()
 
     const isLoading = ref(false)
@@ -27,7 +25,7 @@
         isLoading.value = true
 
         axios
-            .post(storeEnv.apiURL + '/login', formData.value)
+            .post('/login', formData.value)
             .then((response) => {
                 if (response.data.status === 'success') {
                     storeSession.setSession(response.data.data)

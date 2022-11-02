@@ -1,7 +1,6 @@
 <script setup>
     import { ref, inject, onMounted } from 'vue'
     import { useToast } from '@/use/useToast'
-    import { useEnvStore } from '@/stores/env'
     import { useRoute, useRouter } from 'vue-router' 
     
     import ImageForm from '../components/form/ImageForm.vue'
@@ -20,13 +19,12 @@
     const isLoading = ref(false)
 
     const axios = inject('axios')
-    const storeEnv = useEnvStore()
 
     const validForgotDecrypt = () => {
         isLoading.value = true
 
         axios
-            .post(storeEnv.apiURL + '/forgot/token', { code: code.value })
+            .post('/forgot/token', { code: code.value })
             .then((response) => {
                 if (response.data.hasOwnProperty('status') && response.data.status === 'error') {
                     isValid.value = false
@@ -50,7 +48,7 @@
 
     const setNewPassword = () => {
         axios
-            .post(storeEnv.apiURL + '/forgot/reset', formData.value)
+            .post('/forgot/reset', formData.value)
             .then((response) => {
                 if (response.data.status === 'success') {
                     handleToast(response.data.status, response.data.data)
