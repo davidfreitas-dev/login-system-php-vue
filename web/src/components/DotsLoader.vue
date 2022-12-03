@@ -1,33 +1,43 @@
 <template>
-    <div class="loader-wrapper" style="margin: 0 !important;">
-        <div class="loader" style="margin: 0 !important;">
-            <div class="dots"></div>
-            <div class="dots"></div>
-            <div class="dots"></div>
-        </div>
-    </div>
+  <div class="dots">
+    <span class="dot-1"></span>
+    <span class="dot-2"></span>
+    <span class="dot-3"></span>
+  </div>
 </template>
 
 <style scoped>
-.loader-wrapper {
-    @apply flex justify-center items-center h-7
-}
-.loader {
-    @apply rounded-full flex space-x-2
-}
 .dots {
-    @apply w-2.5 h-2.5 bg-white rounded-full animate-bounce
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.75rem;
 }
-.loader div {
-  animation-duration: 0.5s;
+
+.dots > span {
+  width: 12px;
+  height: 12px;
+  margin: 0 3px;
+  background: white;
+  border-radius: 100%;
+  display: inline-block;
+  animation: sk-bouncedelay 1.3s infinite ease-in-out both;
 }
-.loader div:first-child {
-  animation-delay: 0.1s;
+
+.dots .dot-1 {
+  animation-delay: -0.32s;
 }
-.loader div:nth-child(2) {
-  animation-delay: 0.3s;
+
+.dots .dot-2 {
+  animation-delay: -0.16s;
 }
-.loader div:nth-child(3) {
-  animation-delay: 0.6s;
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1.0);
+  }
 }
 </style>

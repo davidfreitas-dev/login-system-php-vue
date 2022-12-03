@@ -3,10 +3,10 @@
     import { useToast } from '@/use/useToast'
     import { useRouter } from 'vue-router'
     
-    import ImageForm from '../components/form/ImageForm.vue'
-    import HeadingForm from '../components/form/HeadingForm.vue'
-    import InputForm from '../components/form/InputForm.vue'
-    import ButtonForm from '../components/form/ButtonForm.vue'
+    import ImageForm from '@/components/form/ImageForm.vue'
+    import HeadingForm from '@/components/form/HeadingForm.vue'
+    import InputForm from '@/components/form/InputForm.vue'
+    import ButtonForm from '@/components/form/ButtonForm.vue'
     import ToastMessage from '@/components/ToastMessage.vue'
 
     const router = useRouter()

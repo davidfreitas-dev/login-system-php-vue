@@ -1,5 +1,5 @@
 <script setup>
-    import { ref } from 'vue'
+    import { ref, watch } from 'vue'
     import { TransitionRoot } from '@headlessui/vue'
     
     const props = defineProps(['toastData', 'type'])
@@ -9,6 +9,14 @@
     const showToast = () => {
         isShowing.value = true
     }
+    
+    watch(isShowing, (newIsShowing) => {
+      if (newIsShowing) {
+        setTimeout(() => {
+          isShowing.value = false
+        }, 5000);
+      }
+    })
     
     defineExpose({showToast})
 </script>    

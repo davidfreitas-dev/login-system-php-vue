@@ -67,12 +67,9 @@ class Auth {
 
         $token = $header . '.' . $payload . '.' . $sign;
 
-        $response = array(
-            "user" => $data,
-            "token" => $token
-        );
+        $data['token'] = $token;
 
-        return Response::handleResponse("success", $response);
+        return Response::handleResponse("success", $data);
 
     }
     
