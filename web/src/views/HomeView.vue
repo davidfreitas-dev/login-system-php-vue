@@ -2,7 +2,7 @@
     import { ref, onMounted } from 'vue'
     import { useRouter } from 'vue-router'
     import { useSessionStore } from '@/stores/session'
-    import LogoutModal from '@/components/LogoutModal.vue'
+    import LogoutModal from '@/components/template/LogoutModal.vue'
 
     const router = useRouter()
     const storeSession = useSessionStore()

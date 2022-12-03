@@ -1,5 +1,5 @@
 <script setup>
-    import DotsLoader from '@/components/DotsLoader.vue'
+    import DotsLoader from '@/components/template/DotsLoader.vue'
 
     const props = defineProps(['text', 'isLoading'])
 </script>
