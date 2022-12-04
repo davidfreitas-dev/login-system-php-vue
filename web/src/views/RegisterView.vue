@@ -1,8 +1,7 @@
 <script setup>
     import { ref, inject } from 'vue'
     import { useToast } from '@/use/useToast'
-    import { useRouter } from 'vue-router'
-    
+    import { useRouter } from 'vue-router'    
     import ImageForm from '@/components/login/ImageForm.vue'
     import HeadingForm from '@/components/login/HeadingForm.vue'
     import InputForm from '@/components/login/InputForm.vue'

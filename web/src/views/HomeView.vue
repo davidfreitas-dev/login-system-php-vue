@@ -36,8 +36,8 @@
 <template>
     <main>
       <div class="welcome">
-          <h1 v-if="storeSession.session.hasOwnProperty('user')">
-              Olá, {{ storeSession.session.user.desperson }}!
+          <h1 v-if="storeSession.session.hasOwnProperty('desperson')">
+              Olá, {{ storeSession.session.desperson }}!
           </h1>
 
           <img 

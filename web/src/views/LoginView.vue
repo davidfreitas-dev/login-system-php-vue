@@ -2,8 +2,7 @@
     import { ref, inject } from 'vue'
     import { useToast } from '@/use/useToast'
     import { useRouter } from 'vue-router'
-    import { useSessionStore } from '@/stores/session'
-    
+    import { useSessionStore } from '@/stores/session'    
     import ImageForm from '@/components/login/ImageForm.vue'
     import HeadingForm from '@/components/login/HeadingForm.vue'
     import InputForm from '@/components/login/InputForm.vue'
