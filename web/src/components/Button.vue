@@ -1,14 +1,14 @@
 <script setup>
-    import DotsLoader from '@/components/template/DotsLoader.vue'
+  import Loader from '@/components/Loader.vue'
 
-    const props = defineProps(['text', 'isLoading'])
+  const props = defineProps(['text', 'isLoading'])
 </script>
 
 <template>
-    <button @click="$emit('onClickButton')" type="button">
-        <DotsLoader v-if="isLoading" />
-        <span v-else>{{ text }}</span>
-    </button>
+  <button @click="$emit('onClickButton')" type="button">
+    <Loader v-if="isLoading" />
+    <span v-else>{{ text }}</span>
+  </button>
 </template>
 
 <style scoped>

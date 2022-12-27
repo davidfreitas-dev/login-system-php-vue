@@ -12,7 +12,7 @@
   }
 
   const handleAction = (response) => {
-      emit('onModal', response)
+    emit('onModal', response)
   }
 
   defineExpose({toggleModal})
