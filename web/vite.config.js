@@ -12,7 +12,6 @@ export default defineConfig({
     }
   },
   server: {
-    type: true,
     port: '3000',
     host: 'localhost'
   },
