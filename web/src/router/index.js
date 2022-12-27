@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    { path: '/home', component: () => import('../pages/HomePage.vue') },
+    { path: '/', component: () => import('../pages/HomePage.vue') },
     { path: '/login', component: () => import('../pages/LoginPage.vue') },
     { path: '/register', component: () => import('../pages/RegisterPage.vue') },
     { path: '/forgot', component: () => import('../pages/ForgotPage.vue') },
