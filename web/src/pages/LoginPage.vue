@@ -16,7 +16,7 @@
   const isLoading = ref(false)
 
   const formData = ref({
-    deslogin: '',
+    desemail: '',
     despassword: ''
   })
 
@@ -39,7 +39,7 @@
   }
 
   const handleValidate = () => {
-    if (!formData.value.deslogin) {
+    if (!formData.value.desemail) {
       return handleToast('error', 'Informe seu login')
     }
 
@@ -68,7 +68,7 @@
 
         <div>
           <Input 
-            v-model="formData.deslogin" 
+            v-model="formData.desemail" 
             :type="'text'" 
             :label="'Nome de usuário ou E-mail'"
             :placeholder="'johndoe@email.com'"

@@ -15,10 +15,7 @@
 
   const formData = ref({
     desperson: '',
-    deslogin: '',
     desemail: '',
-    nrphone: '',
-    nrcpf: '',
     despassword: '',
     inadmin: 0
   })
