@@ -9,7 +9,7 @@ $app->post('/login', function (Request $request, Response $response) {
 
   $data = $request->getParsedBody();
 
-  $result = Auth::login($data['deslogin'], $data['despassword']);
+  $result = Auth::login($data['desemail'], $data['despassword']);
 
   $response->getBody()->write($result);
 

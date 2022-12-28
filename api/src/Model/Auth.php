@@ -8,34 +8,34 @@ use PDO;
 
 class Auth {
         
-    public static function login($login, $password)
+    public static function login($email, $password)
     {
 
-        $sql = "SELECT * FROM tb_users a INNER JOIN tb_persons b ON a.idperson = b.idperson WHERE a.deslogin = :LOGIN OR b.desemail = :LOGIN";
+        $sql = "SELECT * FROM tb_users WHERE desemail = :email";
 
-		$db = new Database();
+        $db = new Database();
 
-		$result = $db->select($sql, array(
-			":LOGIN"=>$login
-		)); 
+        $result = $db->select($sql, array(
+            ":email"=>$email
+        )); 
 
-		if (count($result) === 0) {
+        if (count($result) === 0) {
 
-			return Response::handleResponse("error", "Usuário inexistente ou senha inválida.");
+            return Response::handleResponse(404, "error", "Usuário inexistente ou senha inválida.");
 
-		}
+        }
 
-		$data = $result[0];
+        $data = $result[0];
 
-		if (password_verify($password, $data['despassword'])) {
+        if (password_verify($password, $data['despassword'])) {
 
-			return Auth::generateToken($data);
+            return Auth::generateToken($data);
 
-		} else {
+        } else {
 
-			return Response::handleResponse("error", "Usuário inexistente ou senha inválida.");
+            return Response::handleResponse(404, "error", "Usuário inexistente ou senha inválida.");
 
-		}
+        }
 
     }
 
@@ -69,7 +69,7 @@ class Auth {
 
         $data['token'] = $token;
 
-        return Response::handleResponse("success", $data);
+        return Response::handleResponse(200, "success", $data);
 
     }
     
