@@ -65,18 +65,16 @@ class User {
 
 	public static function add($user) 
 	{
-		
-		$login = !empty($user['deslogin']) ? $user['deslogin'] : $user['desemail'];
 
-		$response = User::checkUserExists($login);
+		$response = User::checkUserExists($user['desemail']);
 			
 		if ($response) {
 
-			return Response::handleResponse("error", "Usuário já cadastrado!");
+			return Response::handleResponse(200, "error", "Usuário já cadastrado!");
 
 		}		
 
-		$sql = "CALL sp_users_save(:desperson, :deslogin, :despassword, :desemail, :nrphone, :nrcpf, :inadmin)";
+		$sql = "INSERT INTO tb_users (desperson, desemail, despassword, inadmin) VALUES (:desperson, :desemail, :despassword, :inadmin)";
 		
 		try {
 
@@ -84,23 +82,22 @@ class User {
 
 			$result = $db->select($sql, array(
 				":desperson"=>$user['desperson'],
-				":deslogin"=>$user['deslogin'],
-				":despassword"=>User::getPasswordHash($user['despassword']),
 				":desemail"=>$user['desemail'],
-				":nrphone"=>$user['nrphone'],
-				":nrcpf"=>$user['nrcpf'],
+				":despassword"=>User::getPasswordHash($user['despassword']),
 				":inadmin"=>$user['inadmin']
 			));
 
-			if ($result) {
+      $response = User::checkUserExists($user['desemail']);
 
-				return Response::handleResponse("success", "Cadastro efetuado com sucesso!");
+			if ($response) {
+
+				return Response::handleResponse(201, "success", "Cadastro efetuado com sucesso!");
 
 			}
 
 		} catch (PDOException $e) {
 			
-			return Response::handleResponse("error", "Falha ao cadastrar usuário: " . $e->getMessage());
+			return Response::handleResponse(400, "error", "Falha ao cadastrar usuário: " . $e->getMessage());
 			
 		}		
 
@@ -167,24 +164,24 @@ class User {
 
 	}
 
-	public static function checkUserExists($login) 
+	public static function checkUserExists($email) 
 	{
 		
-		$sql = "SELECT * FROM tb_users a INNER JOIN tb_persons b ON a.idperson = b.idperson WHERE a.deslogin = :LOGIN OR b.desemail = :LOGIN";		
+		$sql = "SELECT * FROM tb_users WHERE desemail = :email";		
 		
 		try {
 
 			$db = new Database();
 			
 			$result = $db->select($sql, array(
-				":LOGIN"=>$login
+				":email"=>$email
 			));
 
 			return is_array($result) && count($result) > 0;
 
 		} catch (PDOException $e) {
 
-			return Response::handleResponse("error", "Falha ao obter usuário: " . $e->getMessage());
+			return Response::handleResponse(400, "error", "Falha ao obter usuário: " . $e->getMessage());
 
 		}		
 

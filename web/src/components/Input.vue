@@ -1,5 +1,5 @@
 <script setup>
-  import { UserIcon, EnvelopeIcon, LockClosedIcon } from '@heroicons/vue/24/solid'
+  import { UserIcon, EnvelopeIcon, LockClosedIcon } from '@heroicons/vue/24/outline'
 
   const emit = defineEmits(['update:modelValue', 'onKeyupEnter'])
   
