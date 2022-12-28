@@ -12,7 +12,7 @@ class User {
 	public static function get($iduser)
 	{
 
-		$sql = "SELECT * FROM tb_users a INNER JOIN tb_persons b USING(idperson) WHERE a.iduser = :iduser";
+		$sql = "SELECT * FROM tb_users WHERE iduser = :iduser";
 
 		try {
 
@@ -24,11 +24,11 @@ class User {
 
 			$data = $results[0];
 			
-			return Response::handleResponse("success", $data);
+			return Response::handleResponse(200, "success", $data);
 
 		} catch (PDOException $e) {
 			
-			return Response::handleResponse("error", "Falha ao obter usuário: " . $e->getMessage());
+			return Response::handleResponse(500, "error", "Falha ao obter usuário: " . $e->getMessage());
 			
 		}
 
@@ -37,7 +37,7 @@ class User {
 	public static function all() 
 	{
 		
-		$sql = "SELECT * FROM tb_users a INNER JOIN tb_persons b ON a.idperson = b.idperson";		
+		$sql = "SELECT * FROM tb_users";		
 		
 		try {
 
@@ -47,17 +47,17 @@ class User {
 			
 			if (count($result) > 0) {
 
-				return Response::handleResponse("success", $result);
+				return Response::handleResponse(200, "success", $result);
 
 			} else {
 
-				return Response::handleResponse("success", "Nenhum usuário encontrado!");
+				return Response::handleResponse(404, "success", "Nenhum usuário encontrado!");
 
 			}
 
 		} catch (PDOException $e) {
 
-			return Response::handleResponse("error", "Falha ao obter usuários: " . $e->getMessage());
+			return Response::handleResponse(500, "error", "Falha ao obter usuários: " . $e->getMessage());
 			
 		}		
 
