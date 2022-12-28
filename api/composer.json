@@ -7,6 +7,11 @@
         "vlucas/phpdotenv": "^5.4",
         "phpmailer/phpmailer": "^6.6"
     },
+    "config": {
+      "platform": {
+        "php": "7.4"
+      }
+    },
     "autoload": {
         "psr-4": {
             "App\\": "src"
