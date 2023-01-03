@@ -93,7 +93,11 @@ class User {
 
 				return Response::handleResponse(201, "success", "Cadastro efetuado com sucesso!");
 
-			}
+			} else {
+
+        return Response::handleResponse(500, "error", "Não foi possível efetuar o cadastro.");
+
+      }
 
 		} catch (PDOException $e) {
 			
@@ -106,7 +110,7 @@ class User {
 	public static function update($id, $user) 
 	{
 		
-		$sql = "CALL sp_usersupdate_save(:iduser, :desperson, :deslogin, :despassword, :desemail, :nrphone, :nrcpf, :inadmin)";
+		$sql = "UPDATE tb_users SET desperson = :desperson, desemail = :desemail, despassword = :despassword, inadmin = :inadmin WHERE iduser = :iduser";
 		
 		try {
 
@@ -115,11 +119,8 @@ class User {
 			$result = $db->select($sql, array(
 				":iduser"=>$id,
 				":desperson"=>$user['desperson'],
-				":deslogin"=>$user['deslogin'],
-				":despassword"=>User::getPasswordHash($user['despassword']),
 				":desemail"=>$user['desemail'],
-				":nrphone"=>$user['nrphone'],
-				":nrcpf"=>$user['nrcpf'],
+				":despassword"=>User::getPasswordHash($user['despassword']),
 				":inadmin"=>$user['inadmin']
 			));
 
