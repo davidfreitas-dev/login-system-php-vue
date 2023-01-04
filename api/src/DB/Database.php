@@ -20,7 +20,7 @@ class Database {
 
 	}
 
-    private function setParams($statement, $parameters = array())
+  private function setParams($statement, $parameters = array())
 	{
 
 		foreach ($parameters as $key => $value) {
@@ -38,7 +38,7 @@ class Database {
 
 	}
 
-	public function query($rawQuery, $params = array())
+	public function query($rawQuery, $params = array()):int
 	{
 
 		$stmt = $this->conn->prepare($rawQuery);
@@ -46,6 +46,8 @@ class Database {
 		$this->setParams($stmt, $params);
 
 		$stmt->execute();
+
+    return $stmt->rowCount();
 
 	}
 

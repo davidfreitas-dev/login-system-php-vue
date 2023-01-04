@@ -66,9 +66,9 @@ class User {
 	public static function add($user) 
 	{
 
-		$response = User::checkUserExists($user['desemail']);
+		$userExists = User::checkUserExists($user['desemail']);
 			
-		if ($response) {
+		if ($userExists) {
 
 			return Response::handleResponse(200, "error", "Usuário já cadastrado!");
 
@@ -80,16 +80,16 @@ class User {
 
 			$db = new Database();
 
-			$result = $db->select($sql, array(
+			$result = $db->query($sql, array(
 				":desperson"=>$user['desperson'],
 				":desemail"=>$user['desemail'],
 				":despassword"=>User::getPasswordHash($user['despassword']),
 				":inadmin"=>$user['inadmin']
 			));
 
-      $response = User::checkUserExists($user['desemail']);
+      $userExists = User::checkUserExists($user['desemail']);
 
-			if ($response) {
+			if ($result && $userExists) {
 
 				return Response::handleResponse(201, "success", "Cadastro efetuado com sucesso!");
 
@@ -116,7 +116,7 @@ class User {
 
 			$db = new Database();
 			
-			$result = $db->select($sql, array(
+			$result = $db->query($sql, array(
 				":iduser"=>$id,
 				":desperson"=>$user['desperson'],
 				":desemail"=>$user['desemail'],
@@ -126,9 +126,13 @@ class User {
 
 			if ($result) {
 
-				return Response::handleResponse("success", "Usuário atualizado com sucesso!");
+				return Response::handleResponse(200, "success", "Usuário atualizado com sucesso!");
 				
-			}
+			} else {
+
+        return Response::handleResponse(500, "error", "Não foi possível atualizar o usuário.");
+
+      }
 
 		} catch (PDOException $e) {
 
