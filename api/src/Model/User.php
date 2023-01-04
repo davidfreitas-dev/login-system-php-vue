@@ -145,13 +145,13 @@ class User {
 	public static function delete($id) 
 	{
 		
-		$sql = "CALL sp_users_delete(:iduser)";		
+		$sql = "DELETE FROM tb_users WHERE iduser = :iduser";		
 		
 		try {
 
 			$db = new Database();
 			
-			$db->query($sql, array(
+			$result = $db->query($sql, array(
 				":iduser"=>$id
 			));
 			
@@ -159,7 +159,11 @@ class User {
 
 				return Response::handleResponse("success", "Usuário excluido com sucesso!");
 
-			}
+			} else {
+
+        return Response::handleResponse(500, "error", "Não foi possível excluir o usuário.");
+
+      }
 
 		} catch (PDOException $e) {
 
