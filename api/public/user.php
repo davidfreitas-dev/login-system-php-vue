@@ -5,7 +5,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Model\Auth;
 use App\Model\User;
 
-$app->post('/login', function (Request $request, Response $response) {
+$app->post('/signin', function (Request $request, Response $response) {
 
   $data = $request->getParsedBody();
 
@@ -17,7 +17,7 @@ $app->post('/login', function (Request $request, Response $response) {
 
 });
 
-$app->post('/register', function (Request $request, Response $response, array $args) {
+$app->post('/signup', function (Request $request, Response $response, array $args) {
  
   $data = $request->getParsedBody();
 

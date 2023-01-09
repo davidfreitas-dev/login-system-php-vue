@@ -25,7 +25,7 @@ $app->add(new Tuupola\Middleware\JwtAuthentication([
   "header" => "X-Token",
   "regexp" => "/(.*)/",
   "path" => "/",
-  "ignore" => ["/login", "/register", "/forgot", "/forgot/token", "/forgot/reset"],
+  "ignore" => ["/signin", "/signup", "/forgot", "/forgot/token", "/forgot/reset"],
   "secret" => $_ENV['JWT_SECRET_KEY'],
   "algorithm" => "HS256",
   "error" => function ($response, $arguments) {
